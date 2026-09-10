@@ -1,0 +1,13 @@
+# Core dependencies for notebook 02 (reproduce figures from saved weights).
+# Versions are left open for convenience. For an exact reproduction, replace
+# each line with the version printed in Section 1 of the notebook, e.g.
+#   numpy==1.26.4
+#   tensorflow==2.15.0
+numpy
+pandas
+scipy
+scikit-learn
+matplotlib
+rasterio
+tqdm
+tensorflow
