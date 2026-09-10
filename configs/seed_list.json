@@ -1,0 +1,9 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "n_seeds": 3,
+  "note": "Seeds used for both weight initialisation and patch sampling"
+}

@@ -1,0 +1,7 @@
+{
+  "1": 43,
+  "2": 42,
+  "3": 42,
+  "_note": "Best seed selected by minimum validation loss from training logs",
+  "_rule": "Used for model.predict() in spatial inference, permutation importance, case study, and future forecast. All scalar/event metrics and time-series figures use ensemble mean."
+}

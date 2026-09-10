@@ -1,0 +1,83 @@
+{
+  "experiment_name": "outputs_final",
+  "description": "SPI-6 drought forecasting \u2014 ConvGRU Model B \u2014 MSE loss \u2014 main paper version",
+  "model": {
+    "architecture": "ConvGRU2D + BN + Conv2D(1,1)",
+    "gru_filters": 16,
+    "gru_kernel": 3,
+    "dropout": 0.3,
+    "weight_decay": 0.0001
+  },
+  "training": {
+    "loss": "masked_mse",
+    "optimizer": "Adam",
+    "lr": 0.0002,
+    "clipnorm": 1.0,
+    "epochs": 150,
+    "patience": 20,
+    "batch_size": 8,
+    "lr_scheduler": "ReduceLROnPlateau(factor=0.5, patience=5)"
+  },
+  "data": {
+    "target": "SPI-6",
+    "spi_scale": 6,
+    "input_channels": 18,
+    "channel_list": [
+      "SPI-6 (normalised)",
+      "precip_mm",
+      "soil_moisture",
+      "lst_era5_c",
+      "evap_mm",
+      "precip_valid",
+      "sm_valid",
+      "lst_valid",
+      "evap_valid",
+      "NDVI",
+      "NDVI_valid",
+      "sin_month",
+      "cos_month",
+      "elevation",
+      "slope",
+      "lat",
+      "lon",
+      "ROI_mask"
+    ],
+    "domain": "High Atlas & Anti-Atlas, Morocco",
+    "spatial_resolution": "~5 km (ERA5-Land regridded)",
+    "spi_calibration": {
+      "start": "1981-01",
+      "end": "2014-12"
+    }
+  },
+  "splits": {
+    "train": {
+      "start": "1981-01",
+      "end": "2017-12"
+    },
+    "val": {
+      "start": "2018-01",
+      "end": "2020-12"
+    },
+    "test": {
+      "start": "2021-04",
+      "end": "2026-02"
+    }
+  },
+  "patches": {
+    "use_patch_training": true,
+    "patch_size": 32,
+    "patches_per_sample": 3,
+    "min_roi_frac": 0.4,
+    "max_target_nan_frac": 0.4
+  },
+  "evaluation": {
+    "horizons": [
+      1,
+      2,
+      3
+    ],
+    "drought_threshold": -1.0,
+    "final_pred_rule": "ensemble_mean_across_seeds",
+    "inference_model_rule": "best_validation_loss_seed"
+  }
+}
